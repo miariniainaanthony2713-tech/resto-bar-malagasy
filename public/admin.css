@@ -1,0 +1,322 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;500;700&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    background-color: #F1EFE8;
+    color: #1A1A1A;
+}
+
+header {
+    background-color: #1A1A1A;
+    color: #fff;
+    padding: 18px 5%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+header h1 {
+    font-size: 18px;
+    font-weight: 700;
+}
+header h1 span {
+    color: #FF6B00;
+}
+
+.connection_status {
+    font-size: 12px;
+    padding: 4px 14px;
+    border-radius: 20px;
+    background-color: rgba(255,255,255,0.1);
+}
+.connection_status.connected {
+    background-color: #FF6B00;
+    color: #fff;
+}
+
+main {
+    padding: 30px 5%;
+}
+main h2 {
+    margin-bottom: 20px;
+    text-transform: uppercase;
+    color: #1A1A1A;
+}
+
+.orders_list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 20px;
+}
+
+.empty_state {
+    color: #999;
+    font-size: 14px;
+}
+
+.order_card {
+    background-color: #fff;
+    border-radius: 8px;
+    padding: 18px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.08);
+    border-left: 5px solid #FF6B00;
+    animation: highlight 1.2s ease-out;
+}
+.order_card.status-nouvelle {
+    border-left-color: #FF6B00;
+}
+.order_card.status-en_preparation {
+    border-left-color: #f1c40f;
+}
+.order_card.status-prete {
+    border-left-color: #27ae60;
+}
+.order_card.status-servie {
+    border-left-color: #999;
+    opacity: 0.6;
+}
+
+@keyframes highlight {
+    0% { box-shadow: 0 0 0 4px rgba(255,107,0,0.4); }
+    100% { box-shadow: 0 0 10px rgba(0,0,0,0.08); }
+}
+
+.order_header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+    font-size: 13px;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+.order_time {
+    font-weight: 400;
+    color: #999;
+    font-size: 12px;
+}
+.order_customer {
+    font-size: 13px;
+    color: #555;
+    margin-bottom: 10px;
+}
+.order_items {
+    list-style: none;
+    margin-bottom: 10px;
+    font-size: 13px;
+}
+.order_items li {
+    display: flex;
+    justify-content: space-between;
+    padding: 3px 0;
+    border-bottom: 1px dashed #eee;
+}
+.order_total {
+    font-weight: 700;
+    text-align: right;
+    margin-bottom: 12px;
+}
+.order_status {
+    width: 100%;
+    padding: 8px;
+    border-radius: 6px;
+    border: 1px solid #ddd;
+    font-size: 13px;
+    text-transform: uppercase;
+    cursor: pointer;
+    background-color: #fff;
+}
+
+/* ── Navigation admin ── */
+.admin_nav {
+    display: flex;
+    gap: 0;
+    background-color: #1A1A1A;
+    padding: 0 5%;
+    overflow-x: auto;
+}
+.admin_tab {
+    padding: 14px 22px;
+    background: transparent;
+    border: none;
+    color: #aaa;
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    border-bottom: 3px solid transparent;
+    white-space: nowrap;
+    font-family: inherit;
+    transition: 0.2s;
+}
+.admin_tab:hover { color: #fff; }
+.admin_tab.active {
+    color: #FF6B00;
+    border-bottom-color: #FF6B00;
+}
+.badge {
+    display: inline-block;
+    background-color: #FF6B00;
+    color: #fff;
+    border-radius: 10px;
+    font-size: 11px;
+    padding: 1px 7px;
+    margin-left: 4px;
+    min-width: 18px;
+    text-align: center;
+}
+.badge:empty { display: none; }
+
+.admin_panel { display: none; }
+.admin_panel.active { display: block; }
+
+/* ── Formulaire menu ── */
+.menu_form_card {
+    background: #fff;
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 24px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.06);
+}
+.menu_form_card h3 {
+    margin-bottom: 16px;
+    font-size: 15px;
+    color: #1A1A1A;
+    text-transform: uppercase;
+}
+.form_row {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+}
+.form_group {
+    flex: 1;
+    min-width: 180px;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 12px;
+}
+.form_group label {
+    font-size: 12px;
+    margin-bottom: 5px;
+    color: #555;
+}
+.form_group input,
+.form_group select {
+    padding: 8px 10px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-size: 13px;
+    outline: none;
+    font-family: inherit;
+}
+.form_group input:focus,
+.form_group select:focus {
+    border-color: #FF6B00;
+}
+.form_actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 8px;
+}
+.form_actions button {
+    padding: 9px 24px;
+    border: none;
+    border-radius: 6px;
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+    font-family: inherit;
+}
+#save_item_btn { background-color: #FF6B00; color: #fff; }
+#cancel_edit_btn { background-color: #eee; color: #1A1A1A; }
+.form_feedback {
+    margin-top: 8px;
+    font-size: 12px;
+}
+.form_feedback.success { color: #2e7d32; }
+.form_feedback.error { color: #c0392b; }
+
+/* ── Liste menu admin ── */
+.menu_list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 16px;
+}
+.menu_item_card {
+    background: #fff;
+    border-radius: 8px;
+    padding: 14px;
+    box-shadow: 0 0 8px rgba(0,0,0,0.07);
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+.menu_item_card img {
+    width: 100%;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 6px;
+    background: #F1EFE8;
+}
+.menu_item_card .item_name {
+    font-size: 13px;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+.menu_item_card .item_price {
+    font-size: 13px;
+    color: #FF6B00;
+    font-weight: 700;
+}
+.menu_item_card .item_cat {
+    font-size: 11px;
+    color: #999;
+    text-transform: capitalize;
+}
+.item_actions {
+    display: flex;
+    gap: 8px;
+    margin-top: 6px;
+}
+.item_actions button {
+    flex: 1;
+    padding: 6px;
+    border: none;
+    border-radius: 6px;
+    font-size: 12px;
+    cursor: pointer;
+    font-family: inherit;
+}
+.btn_edit  { background: #1A1A1A; color: #fff; }
+.btn_delete { background: #eee; color: #c0392b; font-weight: 700; }
+
+/* ── Réservations ── */
+.reservation_card {
+    background: #fff;
+    border-radius: 8px;
+    padding: 16px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.08);
+    border-left: 5px solid #FF6B00;
+}
+.reservation_card.status-confirme  { border-left-color: #27ae60; }
+.reservation_card.status-annule    { border-left-color: #999; opacity: 0.6; }
+.reservation_card .res_name  { font-weight: 700; font-size: 14px; }
+.reservation_card .res_info  { font-size: 13px; color: #555; margin: 3px 0; }
+.reservation_card .res_date  { font-size: 12px; color: #FF6B00; font-weight: 700; }
+.res_status_select {
+    margin-top: 10px;
+    width: 100%;
+    padding: 7px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-size: 12px;
+    font-family: inherit;
+}
+.order_payment { font-size: 12px; color: #FF6B00; margin-bottom: 6px; }

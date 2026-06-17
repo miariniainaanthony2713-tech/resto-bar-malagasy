@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin — Resto Bar Malagasy</title>
+    <link rel="stylesheet" href="admin.css">
+</head>
+<body>
+
+    <header>
+        <h1><span>RESTO BAR</span> MALAGASY — Admin</h1>
+        <div class="connection_status" id="connection_status">Connexion...</div>
+    </header>
+
+    <nav class="admin_nav">
+        <button class="admin_tab active" data-panel="orders">🧾 Commandes <span id="orders_badge" class="badge"></span></button>
+        <button class="admin_tab" data-panel="menu">🍽️ Menu</button>
+        <button class="admin_tab" data-panel="reservations">📅 Réservations <span id="res_badge" class="badge"></span></button>
+    </nav>
+
+    <main>
+
+        <!-- ── COMMANDES ── -->
+        <section id="panel-orders" class="admin_panel active">
+            <h2>Commandes en cours</h2>
+            <div id="orders_list" class="orders_list">
+                <p class="empty_state">Aucune commande pour le moment.</p>
+            </div>
+        </section>
+
+        <!-- ── MENU ── -->
+        <section id="panel-menu" class="admin_panel">
+            <h2>Gestion du menu</h2>
+
+            <div class="menu_form_card">
+                <h3 id="menu_form_title">Ajouter un plat / boisson</h3>
+                <input type="hidden" id="edit_id">
+                <div class="form_row">
+                    <div class="form_group">
+                        <label>Nom *</label>
+                        <input type="text" id="item_name" placeholder="Ex : Pizza quatre fromages">
+                    </div>
+                    <div class="form_group">
+                        <label>Prix (Ar) *</label>
+                        <input type="number" id="item_price" placeholder="Ex : 12000">
+                    </div>
+                </div>
+                <div class="form_row">
+                    <div class="form_group">
+                        <label>Catégorie *</label>
+                        <select id="item_category">
+                            <option value="entrees">Entrées</option>
+                            <option value="plats">Plats</option>
+                            <option value="boissons">Boissons</option>
+                            <option value="desserts">Desserts</option>
+                        </select>
+                    </div>
+                    <div class="form_group" id="subcategory_group" style="display:none">
+                        <label>Sous-catégorie</label>
+                        <select id="item_subcategory">
+                            <option value="alcoolisees">Alcoolisées</option>
+                            <option value="softs">Softs</option>
+                            <option value="locales">Locales</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form_group">
+                    <label>Photo du plat</label>
+                    <input type="file" id="item_image" accept="image/*">
+                    <img id="image_preview" src="" alt="" style="display:none;margin-top:8px;max-height:80px;border-radius:6px">
+                </div>
+                <div class="form_actions">
+                    <button id="save_item_btn">Ajouter</button>
+                    <button id="cancel_edit_btn" style="display:none">Annuler</button>
+                </div>
+                <p id="menu_feedback" class="form_feedback"></p>
+            </div>
+
+            <div id="menu_list" class="menu_list">
+                <p class="empty_state">Chargement du menu...</p>
+            </div>
+        </section>
+
+        <!-- ── RÉSERVATIONS ── -->
+        <section id="panel-reservations" class="admin_panel">
+            <h2>Réservations</h2>
+            <div id="reservations_list" class="orders_list">
+                <p class="empty_state">Aucune réservation pour le moment.</p>
+            </div>
+        </section>
+
+    </main>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="admin.js"></script>
+</body>
+</html>

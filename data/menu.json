@@ -1,0 +1,178 @@
+[
+  {
+    "id": "1781726801123",
+    "category": "entrees",
+    "subcategory": "",
+    "name": "SALADE DE PATE",
+    "price": 10000,
+    "image": "/uploads/plat_1781726801120.jpg"
+  },
+  {
+    "id": "1781726832656",
+    "category": "entrees",
+    "subcategory": "",
+    "name": "COMPOSÉ",
+    "price": 2000,
+    "image": "/uploads/plat_1781726850044.jpg"
+  },
+  {
+    "id": "1781726924710",
+    "category": "plats",
+    "subcategory": "",
+    "name": "LASOPY ( ATODY, TONGONTR'OMBY,....)",
+    "price": 2500,
+    "image": "/uploads/plat_1781726924708.jpg"
+  },
+  {
+    "id": "1781726978381",
+    "category": "plats",
+    "subcategory": "",
+    "name": "VARY SY LAOKA (AKOHO , SOSISY ,...)",
+    "price": 6000,
+    "image": "/uploads/plat_1781726978372.jpg"
+  },
+  {
+    "id": "1781727014784",
+    "category": "boissons",
+    "subcategory": "alcoolisees",
+    "name": "CUVÉE NOIRE",
+    "price": 10000,
+    "image": "/uploads/plat_1781727014782.jpg"
+  },
+  {
+    "id": "1781727037332",
+    "category": "boissons",
+    "subcategory": "alcoolisees",
+    "name": "THB FRESH",
+    "price": 7000,
+    "image": "/uploads/plat_1781727037330.png"
+  },
+  {
+    "id": "1781727064332",
+    "category": "boissons",
+    "subcategory": "alcoolisees",
+    "name": "QUEENS",
+    "price": 7000,
+    "image": "/uploads/plat_1781727064330.png"
+  },
+  {
+    "id": "1781727086487",
+    "category": "boissons",
+    "subcategory": "alcoolisees",
+    "name": "RHUM 303",
+    "price": 5000,
+    "image": "/uploads/plat_1781727086484.jpg"
+  },
+  {
+    "id": "1781727128768",
+    "category": "boissons",
+    "subcategory": "alcoolisees",
+    "name": "BEAUFORT",
+    "price": 5000,
+    "image": "/uploads/plat_1781727128765.png"
+  },
+  {
+    "id": "1781727152350",
+    "category": "boissons",
+    "subcategory": "alcoolisees",
+    "name": "DZAMA FREEZE",
+    "price": 10000,
+    "image": "/uploads/plat_1781727152348.png"
+  },
+  {
+    "id": "1781727184000",
+    "category": "boissons",
+    "subcategory": "alcoolisees",
+    "name": "GOLD 8",
+    "price": 6000,
+    "image": "/uploads/plat_1781727183998.png"
+  },
+  {
+    "id": "1781727207212",
+    "category": "boissons",
+    "subcategory": "alcoolisees",
+    "name": "GOLD BLANCHE",
+    "price": 6000,
+    "image": "/uploads/plat_1781727207208.png"
+  },
+  {
+    "id": "1781727250766",
+    "category": "boissons",
+    "subcategory": "alcoolisees",
+    "name": "GOLD BLONDE",
+    "price": 6000,
+    "image": "/uploads/plat_1781727250764.png"
+  },
+  {
+    "id": "1781727273733",
+    "category": "boissons",
+    "subcategory": "alcoolisees",
+    "name": "THB",
+    "price": 6500,
+    "image": "/uploads/plat_1781727273730.png"
+  },
+  {
+    "id": "1781727314889",
+    "category": "boissons",
+    "subcategory": "alcoolisees",
+    "name": "MARKOVITCH",
+    "price": 13000,
+    "image": "/uploads/plat_1781727314888.png"
+  },
+  {
+    "id": "1781727378502",
+    "category": "boissons",
+    "subcategory": "softs",
+    "name": "CAPRICE ANANA",
+    "price": 3000,
+    "image": "/uploads/plat_1781727378501.png"
+  },
+  {
+    "id": "1781727412852",
+    "category": "boissons",
+    "subcategory": "softs",
+    "name": "CAPRICE POMME",
+    "price": 3000,
+    "image": "/uploads/plat_1781727412848.png"
+  },
+  {
+    "id": "1781727435405",
+    "category": "boissons",
+    "subcategory": "softs",
+    "name": "CAPRICE GRENADINE",
+    "price": 3000,
+    "image": "/uploads/plat_1781727435403.png"
+  },
+  {
+    "id": "1781727463637",
+    "category": "boissons",
+    "subcategory": "softs",
+    "name": "CAPRICE ORANGE",
+    "price": 3000,
+    "image": "/uploads/plat_1781727463635.png"
+  },
+  {
+    "id": "1781727488456",
+    "category": "boissons",
+    "subcategory": "softs",
+    "name": "WOCO",
+    "price": 3000,
+    "image": "/uploads/plat_1781727488453.png"
+  },
+  {
+    "id": "1781727522919",
+    "category": "boissons",
+    "subcategory": "softs",
+    "name": "YOUZOU",
+    "price": 3000,
+    "image": "/uploads/plat_1781727522917.png"
+  },
+  {
+    "id": "1781727541702",
+    "category": "boissons",
+    "subcategory": "softs",
+    "name": "TONIC",
+    "price": 3000,
+    "image": "/uploads/plat_1781727541700.png"
+  }
+]

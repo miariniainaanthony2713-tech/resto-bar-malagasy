@@ -1,0 +1,21 @@
+[
+  {
+    "id": "1781639266675",
+    "customerName": "anthony",
+    "tableNumber": "4",
+    "items": [
+      {
+        "name": "SALADE DE POMME DE TERRE MALGACHE",
+        "price": 12000,
+        "quantity": 1
+      }
+    ],
+    "total": 12000,
+    "payment": {
+      "operator": "MVola",
+      "transactionId": "0344859920"
+    },
+    "status": "servie",
+    "createdAt": "2026-06-16T19:47:46.675Z"
+  }
+]
