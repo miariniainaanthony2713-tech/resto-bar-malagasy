@@ -19,77 +19,63 @@ header {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    height: 50px;
-    padding: 0 10%;
+    height: 65px;
+    padding: 0 6%;
     position: fixed;
     top: 0;
     left: 0;
     right: 0;
-    background-color: rgba(255 255 255 /0.9);
-    box-shadow: 0 0 10px rgba(0,0,0,0.2);
+    background-color: #1A1A1A;
+    box-shadow: 0 2px 20px rgba(0,0,0,0.3);
     z-index: 10;
 }
-.menu{
-    display: flex;
-}
-.logo{
+.logo {
     color: #FF6B00;
     font-weight: 700;
-    font-size: 25px;
- }
- .logo span {
-    color: #1A1A1A;
- }
- .nav_menu li {
-   margin: 0 15px;  
-   list-style: none;
- }
- .nav_menu li a {
-    font-size: 14px;
-    text-decoration: 0;
-    color: #999;
+    font-size: 20px;
+    letter-spacing: 0.5px;
+}
+.logo span {
+    color: #fff;
+}
+.nav_menu {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    list-style: none;
+}
+.nav_menu li a {
+    font-size: 13px;
+    text-decoration: none;
+    color: #aaa;
+    font-weight: 500;
+    padding: 8px 16px;
+    border-radius: 8px;
     position: relative;
- }
- .nav_menu li a::before {  
-    position: absolute;
-    top: -5px;
-    left: 0;
-    content: "";
-    width: 0;
-    height: 2px;
-    border-radius: 6px;
-    background-color:#FF6B00 ;
-    transition: 0,5s;
- }
- .nav_menu li a:hover:before{
-    width: 100%;
-  }
-  .nav_menu li a:hover::after {
-    position: absolute;
-    bottom: -5px;
-    right: 0;
-    content: "";
-    width: 0;
-    height: 2px;
-    border-radius: 6px;
-    background-color: #FF6B00;
-    transition: 0.5s;
-  }
-  .nav_menu li a:hover::after {
-    width: 100%;
-  }
-  .nav_menu li a:hover {
-    color: #000;
-  }
+    transition: 0.25s;
+    letter-spacing: 0.3px;
+}
+.nav_menu li a:hover {
+    color: #fff;
+    background-color: rgba(255,107,0,0.12);
+}
+.nav_menu li a.active {
+    color: #FF6B00;
+    background-color: rgba(255,107,0,0.1);
+}
+.nav_menu li a::before,
+.nav_menu li a::after {
+    display: none;
+}
 
  /* home CSS */ 
  #home {
-    margin-top: 50px;
+    margin-top: 65px;
     display: flex;
     align-items: center;
     margin-left: 10px;
     margin-right: 10px;
-    height: calc(100vh - 50px);
+    height: calc(100vh - 65px);
     justify-content: space-between;
  }
  #home .left {
@@ -652,10 +638,11 @@ hr {
     }
     header {
         padding: 0 20px;
+        height: 60px;
     }
     .cart_icon {
         margin-left: auto;
-        margin-right: 15px;
+        margin-right: 12px;
     }
     #home {
         flex-direction: column;
@@ -754,19 +741,31 @@ hr {
     } 
     header .nav_menu.responsive {
         display: flex;
-        position: relative;
-        top: 50px;
+        position: absolute;
+        top: 65px;
         left: 0;
         width: 100%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        background-color: #fff;
-        box-shadow: 0 0 10px rgba(0,0,0,0.1);
         flex-direction: column;
+        align-items: stretch;
+        background-color: #1A1A1A;
+        box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+        padding: 12px 20px 16px;
+        gap: 4px;
     }
     header .nav_menu.responsive li {
-        margin: 15px 0;
+        margin: 0;
+    }
+    header .nav_menu.responsive li a {
+        display: block;
+        padding: 12px 16px;
+        font-size: 14px;
+        color: #aaa;
+        border-radius: 8px;
+    }
+    header .nav_menu.responsive li a:hover,
+    header .nav_menu.responsive li a.active {
+        background-color: rgba(255,107,0,0.12);
+        color: #FF6B00;
     }
 }
 /* ── Étapes du panier ── */

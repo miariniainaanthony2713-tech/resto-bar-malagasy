@@ -48,7 +48,7 @@
         })
         .then(function(r){ return r.json(); })
         .then(function(data){
-          if (data.success){
+          if (data.token){
             sessionStorage.setItem('admin_token', data.token);
             window.location.href = '/admin.html';
           } else {
