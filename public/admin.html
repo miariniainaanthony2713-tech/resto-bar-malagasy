@@ -5,12 +5,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin — Resto Bar Malagasy</title>
     <link rel="stylesheet" href="admin.css">
+    <script>
+      // Vérifier le token avant d'afficher la page
+      if (!sessionStorage.getItem('admin_token')) {
+        window.location.href = '/login.html';
+      }
+    </script>
 </head>
 <body>
 
     <header>
         <h1><span>RESTO BAR</span> MALAGASY — Admin</h1>
-        <div class="connection_status" id="connection_status">Connexion...</div>
+        <div style="display:flex;align-items:center;gap:12px">
+            <div class="connection_status" id="connection_status">Connexion...</div>
+            <button id="logout_btn" onclick="sessionStorage.removeItem('admin_token');window.location.href='/login.html'" style="background:#FF6B00;color:#fff;border:none;padding:5px 14px;border-radius:20px;font-size:12px;cursor:pointer;font-family:inherit">Déconnexion</button>
+        </div>
     </header>
 
     <nav class="admin_nav">

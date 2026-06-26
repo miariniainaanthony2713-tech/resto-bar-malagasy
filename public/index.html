@@ -1,173 +1,27 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Resto Bar Malagasy</title>
+    <title>Resto Bar Malagasy — Accueil</title>
     <link rel="stylesheet" href="style.css">
 </head>
-<body>
-
-    <header>
-        <div class="logo">
-            <p><span>RESTO BAR</span> MALAGASY</p>
-        </div>
-        <ul class="menu">
-            <li><a href="#home">Acceuil</a></li>
-            <li><a href="#menu">Menu</a></li>
-            <li><a href="#about_us">A Propos</a></li>
-            <li><a href="#reservation">Réservation</a></li>
-        </ul>
-
-        <div class="cart_icon" id="cart_icon">
-            🛒 <span id="cart_count">0</span>
-        </div>
-
-        <!-- menu responsive -->
-         <div class="toggle_menu"></div>
-    </header>
-
-    <!-- panier -->
-    <div class="cart_overlay" id="cart_overlay"></div>
-    <div class="cart_panel" id="cart_panel">
-
-        <!-- ÉTAPE 1 : Panier -->
-        <div id="step_cart" class="cart_step active">
-            <div class="cart_header">
-                <h3>Votre commande</h3>
-                <span class="cart_close" id="cart_close">&times;</span>
-            </div>
-            <div id="cart_items" class="cart_items"></div>
-            <p class="cart_total">Total : <span id="cart_total">0</span> Ar</p>
-            <label>Votre nom</label>
-            <input type="text" id="customer_name" placeholder="Votre nom">
-            <label>Numéro de table</label>
-            <input type="text" id="table_number" placeholder="Ex : Table 4">
-            <button id="go_to_payment">Choisir le paiement →</button>
-            <p id="order_feedback" class="order_feedback"></p>
-        </div>
-
-        <!-- ÉTAPE 2 : Paiement Mobile Money -->
-        <div id="step_payment" class="cart_step">
-            <div class="cart_header">
-                <span class="cart_back" id="back_to_cart">← Retour</span>
-                <h3>Paiement</h3>
-                <span class="cart_close cart_close_2">&times;</span>
-            </div>
-            <p class="payment_total_label">Montant à payer</p>
-            <p class="payment_total_amount"><span id="payment_amount">0</span> Ar</p>
-
-            <p class="payment_choose_label">Choisissez votre opérateur :</p>
-            <div class="payment_operators">
-                <button class="operator_btn active" data-operator="mvola">
-                    <span class="op_icon">📱</span>
-                    <span>MVola</span>
-                </button>
-                <button class="operator_btn" data-operator="orange">
-                    <span class="op_icon">🟠</span>
-                    <span>Orange Money</span>
-                </button>
-            </div>
-
-            <div class="payment_instructions" id="payment_instructions">
-                <p class="instr_title">Comment payer avec <span id="op_name">MVola</span> :</p>
-                <ol>
-                    <li>Composez <strong id="op_ussd">*111#</strong></li>
-                    <li>Choisissez "Envoyer de l'argent"</li>
-                    <li>Envoyez <strong><span id="instr_amount">0</span> Ar</strong> au numéro <strong id="op_number">034 48 599 20</strong></li>
-                    <li>Gardez votre numéro de transaction</li>
-                </ol>
-                <label>Votre numéro de transaction</label>
-                <input type="text" id="transaction_id" placeholder="Ex : TXN123456">
-            </div>
-
-            <button id="submit_order">Confirmer la commande</button>
-            <p id="payment_feedback" class="order_feedback"></p>
-        </div>
-
-        <!-- ÉTAPE 3 : Reçu -->
-        <div id="step_receipt" class="cart_step">
-            <div class="receipt_header">
-                <div class="receipt_check">✓</div>
-                <h3>Commande confirmée !</h3>
-                <p>Merci, votre commande est en cours de préparation.</p>
-            </div>
-            <div class="receipt_body">
-                <div class="receipt_row"><span>Nom</span><span id="rcpt_name">—</span></div>
-                <div class="receipt_row"><span>Table</span><span id="rcpt_table">—</span></div>
-                <div class="receipt_row"><span>Paiement</span><span id="rcpt_operator">—</span></div>
-                <div class="receipt_row"><span>Transaction</span><span id="rcpt_txn">—</span></div>
-                <hr class="receipt_hr">
-                <div id="rcpt_items" class="rcpt_items"></div>
-                <hr class="receipt_hr">
-                <div class="receipt_row receipt_total_row">
-                    <span>TOTAL</span>
-                    <span id="rcpt_total">0 Ar</span>
-                </div>
-                <p class="receipt_note">Le paiement sera vérifié par notre équipe. En cas de problème, contactez-nous au <strong>034 48 599 20</strong>.</p>
-            </div>
-            <button id="close_receipt">Fermer</button>
-        </div>
-
-    </div>
-
-   <!-- section acceuil home -->
+<body data-page="accueil">
+<script src="components.js"></script>
 
    <section id="home">
     <div class="left">
         <h4>Menu du jour</h4>
-        <h1>RESTO BAR MALAGASY</h1>
-        <p>Découvrez nos plats et boissons dans notre resto bar Malagasy. Un voyage culinaire au cœur de Madagascar.</p>
-         <button><a href="#menu">Commander chez nous</a></button>
+        <h1>AFRICAN CHICKEN MALGACHE</h1>
+        <p>Découvrez notre poulet mariné aux épices malgaches, grillé à la perfection et servi avec du riz vary amin'anana. Un voyage culinaire au cœur de Madagascar.</p>
+        <button><a href="/menu.html">Commander chez nous</a></button>
     </div>
     <div class="right">
-        <img src="vary_sy_laoka_2-MAX-w1000h600.jpg">
+        <img src="https://images.unsplash.com/photo-1598103442097-8b74394b95c3?w=600&q=80" alt="African Chicken Malgache">
     </div>
    </section>
 
-   <!-- section menu -->
-
- <section id="menu">
-    <h4 class="mini_title">Notre Menu</h4>
-    <h2 class="title">SAKAFO MATSIRO</h2>
-
-    <div class="menu_tabs">
-        <button class="tab_btn active" data-target="entrees">Entrées</button>
-        <button class="tab_btn" data-target="plats">Plats</button>
-        <button class="tab_btn" data-target="boissons">Boissons</button>
-        <button class="tab_btn" data-target="desserts">Desserts</button>
-    </div>
-
-    <!-- Entrées -->
-    <div class="menu_category active" data-category="entrees">
-        <div class="dishes" id="dishes-entrees"><p class="menu_loading">Chargement...</p></div>
-    </div>
-    <!-- Plats -->
-    <div class="menu_category" data-category="plats">
-        <div class="dishes" id="dishes-plats"><p class="menu_loading">Chargement...</p></div>
-    </div>
-    <!-- Boissons -->
-    <div class="menu_category" data-category="boissons">
-        <div class="drink_tabs">
-            <button class="drink_tab_btn active" data-sub="alcoolisees">Alcoolisées</button>
-            <button class="drink_tab_btn" data-sub="softs">Softs</button>
-            <button class="drink_tab_btn" data-sub="locales">Locales</button>
-        </div>
-        <div class="dishes drink_category active" id="dishes-alcoolisees" data-sub="alcoolisees"><p class="menu_loading">Chargement...</p></div>
-        <div class="dishes drink_category" id="dishes-softs" data-sub="softs"></div>
-        <div class="dishes drink_category" id="dishes-locales" data-sub="locales"></div>
-    </div>
-    <!-- Desserts -->
-    <div class="menu_category" data-category="desserts">
-        <div class="dishes" id="dishes-desserts"><p class="menu_loading">Chargement...</p></div>
-    </div>
- </section>
-
-
-       <!-- section about us -->    
-
-<section id="about_us">
+   <section id="about_us">
        <h4 class="mini_title">À propos</h4>
        <h2 class="title">Une expérience unique au cœur d'Antananarivo</h2>
        <div class="about">
@@ -178,391 +32,64 @@
                  <h3>Cuisine malgache, ambiance moderne</h3>
                  <p>Resto Bar Malagasy est bien plus qu'un simple restaurant — c'est un endroit où la cuisine traditionnelle malgache rencontre une ambiance moderne et chaleureuse. Nous sélectionnons les meilleurs produits locaux pour vous offrir des plats authentiques préparés avec passion.</p>
                  <p>Que vous veniez pour un repas en famille, un dîner entre amis ou simplement pour siroter un verre, notre équipe est là pour vous accueillir comme à la maison.</p>
-                 <button><a href="#reservation">Réserver une table</a></button>
+                 <button><a href="/reservation.html">Réserver une table</a></button>
+            </div>
        </div>
-   </div> 
-</section>
+   </section>
 
-
-        <section class="comment_section">
-               <h4 class="mini_title">Avis clients</h4>
-               <h2 class="title">CE QUE DISENT NOS CLIENTS</h2>
-               <div class="comments">
-                     <div class="comment">
-                        <div>
-                          <img src="https://ui-avatars.com/api/?name=Toky+Randria&background=FF6B00&color=fff&rounded=true" alt="Toky Randria">
-                          <h4>Toky Randria</h4>
-                        </div>
-                        <p>La meilleure cuisine malgache d'Antananarivo ! Le poulet grillé est incroyable et l'ambiance est top. Je reviens chaque semaine !</p>
-                     </div>
-                     <div class="comment">
-                        <div>
-                          <img src="https://ui-avatars.com/api/?name=Fanja+Rasolofo&background=1A1A1A&color=fff&rounded=true" alt="Fanja Rasolofo">
-                          <h4>Fanja Rasolofo</h4>
-                        </div>
-                        <p>Accueil chaleureux, plats délicieux et prix raisonnables. Le mojito malagasy est à essayer absolument !</p>
-                     </div>
-                     <div class="comment">
-                        <div>
-                          <img src="https://ui-avatars.com/api/?name=Hery+Rakotoson&background=FF6B00&color=fff&rounded=true" alt="Hery Rakotoson">
-                          <h4>Hery Rakotoson</h4>
-                        </div>
-                        <p>Un endroit parfait pour se retrouver entre amis. La bière THB bien fraîche et les accras de morue font toujours l'unanimité !</p>
-                     </div>
-              </div>
-        </section>
-
-          <!-- section reservation -->
-           <section id="reservation">
-               <h4 class="mini_title">Réservation</h4>
-               <h2 class="title">Réservez votre table</h2>
-               <form id="reservation_form">
-                    <label>Votre nom *</label>
-                    <input type="text" id="res_name" placeholder="Votre nom complet" required>
-                    <label>Votre email *</label>
-                    <input type="email" id="res_email" placeholder="email@exemple.com" required>
-                    <label>Votre numéro</label>
-                    <input type="text" id="res_phone" placeholder="034 XX XX XX">
-                    <label>Date de réservation *</label>
-                    <input type="date" id="res_date" required>
-                    <button type="submit" id="res_submit">Envoyer la réservation</button>
-                    <p id="res_feedback" class="order_feedback"></p>
-               </form>
-           </section>
-
-
-           <footer>
-             <div class="services_list">
-                <div class="service">
-                    <img src="img12.jpg" alt="">
-                    <h2>Ouverture</h2>
-                    <p>07h30 à 22h45</p>
-                    <p>Tous les jours</p>
+   <section class="comment_section">
+       <h4 class="mini_title">Avis clients</h4>
+       <h2 class="title">CE QUE DISENT NOS CLIENTS</h2>
+       <div class="comments">
+             <div class="comment">
+                <div>
+                  <img src="https://ui-avatars.com/api/?name=Toky+Randria&background=FF6B00&color=fff&rounded=true" alt="Toky Randria">
+                  <h4>Toky Randria</h4>
                 </div>
-
-             <div class="service">
-                    <img src="img13.png" alt="">
-                    <h2>Adresse</h2>
-                    <p>Antananarivo</p>
-                    <p>Madagascar</p>
+                <p>La meilleure cuisine malgache d'Antananarivo ! Le poulet grillé est incroyable et l'ambiance est top. Je reviens chaque semaine !</p>
+             </div>
+             <div class="comment">
+                <div>
+                  <img src="https://ui-avatars.com/api/?name=Fanja+Rasolofo&background=1A1A1A&color=fff&rounded=true" alt="Fanja Rasolofo">
+                  <h4>Fanja Rasolofo</h4>
                 </div>
-
-             <div class="service">
-                    <img src="img14.jpg" alt="">
-                    <h2>Contact</h2>
-                    <p>restobarmalagasy@gmail.com</p>
-                    <p>034 48 599 20</p>
+                <p>Accueil chaleureux, plats délicieux et prix raisonnables. Le mojito malagasy est à essayer absolument !</p>
+             </div>
+             <div class="comment">
+                <div>
+                  <img src="https://ui-avatars.com/api/?name=Hery+Rakotoson&background=FF6B00&color=fff&rounded=true" alt="Hery Rakotoson">
+                  <h4>Hery Rakotoson</h4>
                 </div>
+                <p>Un endroit parfait pour se retrouver entre amis. La bière THB bien fraîche et les accras de morue font toujours l'unanimité !</p>
+             </div>
+       </div>
+   </section>
 
-                <hr>
-              </div>
+   <footer>
+     <div class="services_list">
+        <div class="service">
+            <img src="img12.jpg" alt="">
+            <h2>Ouverture</h2>
+            <p>07h30 à 22h45</p>
+            <p>Tous les jours</p>
+        </div>
+        <div class="service">
+            <img src="img13.png" alt="">
+            <h2>Adresse</h2>
+            <p>Antananarivo</p>
+            <p>Madagascar</p>
+        </div>
+        <div class="service">
+            <img src="img14.jpg" alt="">
+            <h2>Contact</h2>
+            <p>restobarmalagasy@gmail.com</p>
+            <p>034 XX XX XX</p>
+        </div>
+        <hr>
+     </div>
+     <p class="footer_text">Réalisé par <span>RAKOTONDRASOA Miariniaina Anthony Naivoson</span> | Tous les droits sont réservés.</p>
+   </footer>
 
-              <p class="footer_text">Réalisé par <span>RAKOTONDRASOA Miariniaina Anthony Naivoson</span> | Tous les droits sont réservés.</p>
-           </footer>
-
-
-           <script>
-              var small_menu = document.querySelector('.toggle_menu')
-              var menu = document.querySelector('.menu')
-
-              small_menu.onclick = function(){
-                small_menu.classList.toggle('active');
-                menu.classList.toggle('responsive');
-              }
-
-              var tabBtns = document.querySelectorAll('.tab_btn');
-              var menuCategories = document.querySelectorAll('.menu_category');
-
-              tabBtns.forEach(function(btn){
-                btn.onclick = function(){
-                    tabBtns.forEach(function(b){ b.classList.remove('active'); });
-                    menuCategories.forEach(function(c){ c.classList.remove('active'); });
-                    btn.classList.add('active');
-                    document.querySelector('.menu_category[data-category="' + btn.dataset.target + '"]').classList.add('active');
-                }
-              });
-
-              var drinkTabBtns = document.querySelectorAll('.drink_tab_btn');
-              var drinkCategories = document.querySelectorAll('.drink_category');
-
-              drinkTabBtns.forEach(function(btn){
-                btn.onclick = function(){
-                    drinkTabBtns.forEach(function(b){ b.classList.remove('active'); });
-                    drinkCategories.forEach(function(c){ c.classList.remove('active'); });
-                    btn.classList.add('active');
-                    document.querySelector('.drink_category[data-sub="' + btn.dataset.sub + '"]').classList.add('active');
-                }
-              });
-
-              /* ── Panier ── */
-              var cart = [];
-              var currentOperator = 'mvola';
-
-              var OPERATORS = {
-                mvola:  { name: 'MVola',        ussd: '*111#', number: '034 48 599 20' },
-                orange: { name: 'Orange Money',  ussd: '#144#', number: '032 65 419 88' }
-              };
-
-              var cartIcon    = document.getElementById('cart_icon');
-              var cartPanel   = document.getElementById('cart_panel');
-              var cartOverlay = document.getElementById('cart_overlay');
-              var cartCountEl = document.getElementById('cart_count');
-              var cartTotalEl = document.getElementById('cart_total');
-              var cartItemsEl = document.getElementById('cart_items');
-              var feedbackEl  = document.getElementById('order_feedback');
-
-              function showStep(id){
-                document.querySelectorAll('.cart_step').forEach(function(s){ s.classList.remove('active'); });
-                document.getElementById(id).classList.add('active');
-              }
-
-              function openCart(){
-                cartPanel.classList.add('open');
-                cartOverlay.classList.add('open');
-                showStep('step_cart');
-              }
-              function closeCart(){
-                cartPanel.classList.remove('open');
-                cartOverlay.classList.remove('open');
-              }
-
-              cartIcon.onclick = openCart;
-              cartOverlay.onclick = closeCart;
-              document.getElementById('cart_close').onclick = closeCart;
-              document.querySelectorAll('.cart_close_2').forEach(function(el){ el.onclick = closeCart; });
-              document.getElementById('back_to_cart').onclick = function(){ showStep('step_cart'); };
-              document.getElementById('close_receipt').onclick = function(){
-                closeCart();
-                setTimeout(function(){ showStep('step_cart'); }, 400);
-              };
-
-              function getTotal(){
-                return cart.reduce(function(sum, item){ return sum + item.price * item.qty; }, 0);
-              }
-
-              function renderCart(){
-                cartItemsEl.innerHTML = '';
-                var count = 0;
-
-                if (cart.length === 0){
-                  cartItemsEl.innerHTML = '<p class="cart_empty">Votre panier est vide.</p>';
-                }
-
-                cart.forEach(function(item, index){
-                  count += item.qty;
-                  var row = document.createElement('div');
-                  row.className = 'cart_item';
-                  row.innerHTML =
-                    '<span class="cart_item_name">' + item.name + '</span>' +
-                    '<div class="cart_item_qty">' +
-                      '<button class="qty_btn" data-action="dec" data-index="' + index + '">-</button>' +
-                      '<span>' + item.qty + '</span>' +
-                      '<button class="qty_btn" data-action="inc" data-index="' + index + '">+</button>' +
-                    '</div>' +
-                    '<span class="cart_item_price">' + (item.price * item.qty).toLocaleString('fr-FR') + ' Ar</span>';
-                  cartItemsEl.appendChild(row);
-                });
-
-                cartItemsEl.querySelectorAll('.qty_btn').forEach(function(btn){
-                  btn.onclick = function(){
-                    var i = parseInt(btn.dataset.index, 10);
-                    if (btn.dataset.action === 'inc') { cart[i].qty++; }
-                    else { cart[i].qty--; if (cart[i].qty <= 0) cart.splice(i, 1); }
-                    renderCart();
-                  };
-                });
-
-                var total = getTotal();
-                cartTotalEl.textContent = total.toLocaleString('fr-FR');
-                cartCountEl.textContent = count;
-              }
-
-              function addToCart(name, price){
-                var existing = cart.find(function(item){ return item.name === name; });
-                if (existing){ existing.qty++; }
-                else { cart.push({ name: name, price: price, qty: 1 }); }
-                renderCart();
-                openCart();
-              }
-
-              /* ── Étape 2 : Paiement ── */
-              function updateOperatorUI(){
-                var op = OPERATORS[currentOperator];
-                document.getElementById('op_name').textContent    = op.name;
-                document.getElementById('op_ussd').textContent    = op.ussd;
-                document.getElementById('op_number').textContent  = op.number;
-                document.getElementById('instr_amount').textContent = getTotal().toLocaleString('fr-FR');
-                document.getElementById('payment_amount').textContent = getTotal().toLocaleString('fr-FR');
-              }
-
-              document.querySelectorAll('.operator_btn').forEach(function(btn){
-                btn.addEventListener('click', function(){
-                  document.querySelectorAll('.operator_btn').forEach(function(b){ b.classList.remove('active'); });
-                  btn.classList.add('active');
-                  currentOperator = btn.dataset.operator;
-                  updateOperatorUI();
-                });
-              });
-
-              document.getElementById('go_to_payment').onclick = function(){
-                if (cart.length === 0){
-                  feedbackEl.textContent = 'Votre panier est vide.';
-                  feedbackEl.className = 'order_feedback error';
-                  return;
-                }
-                if (!document.getElementById('customer_name').value.trim()){
-                  feedbackEl.textContent = 'Veuillez entrer votre nom.';
-                  feedbackEl.className = 'order_feedback error';
-                  return;
-                }
-                feedbackEl.textContent = '';
-                updateOperatorUI();
-                showStep('step_payment');
-              };
-
-              /* ── Étape 3 : Envoi + Reçu ── */
-              document.getElementById('submit_order').onclick = function(){
-                var txn = document.getElementById('transaction_id').value.trim();
-                var payFeedback = document.getElementById('payment_feedback');
-
-                if (!txn){
-                  payFeedback.textContent = 'Veuillez entrer votre numéro de transaction.';
-                  payFeedback.className = 'order_feedback error';
-                  return;
-                }
-
-                var op = OPERATORS[currentOperator];
-                var customerName = document.getElementById('customer_name').value;
-                var tableNumber  = document.getElementById('table_number').value;
-                var total = getTotal();
-
-                var order = {
-                  customerName: customerName,
-                  tableNumber:  tableNumber,
-                  payment: { operator: op.name, transactionId: txn },
-                  items: cart.map(function(item){
-                    return { name: item.name, price: item.price, quantity: item.qty };
-                  })
-                };
-
-                payFeedback.textContent = 'Envoi en cours...';
-                payFeedback.className = 'order_feedback';
-                document.getElementById('submit_order').disabled = true;
-
-                fetch('/api/orders', {
-                  method: 'POST',
-                  headers: { 'Content-Type': 'application/json' },
-                  body: JSON.stringify(order)
-                })
-                .then(function(res){ if (!res.ok) throw new Error(); return res.json(); })
-                .then(function(){
-                  /* Remplir le reçu */
-                  document.getElementById('rcpt_name').textContent     = customerName || '—';
-                  document.getElementById('rcpt_table').textContent    = tableNumber  || '—';
-                  document.getElementById('rcpt_operator').textContent = op.name;
-                  document.getElementById('rcpt_txn').textContent      = txn;
-                  document.getElementById('rcpt_total').textContent    = total.toLocaleString('fr-FR') + ' Ar';
-
-                  var rcptItems = document.getElementById('rcpt_items');
-                  rcptItems.innerHTML = '';
-                  cart.forEach(function(item){
-                    var row = document.createElement('div');
-                    row.className = 'receipt_row';
-                    row.innerHTML =
-                      '<span>' + item.qty + ' × ' + item.name + '</span>' +
-                      '<span>' + (item.price * item.qty).toLocaleString('fr-FR') + ' Ar</span>';
-                    rcptItems.appendChild(row);
-                  });
-
-                  /* Réinitialiser */
-                  cart = [];
-                  renderCart();
-                  document.getElementById('customer_name').value  = '';
-                  document.getElementById('table_number').value   = '';
-                  document.getElementById('transaction_id').value = '';
-                  document.getElementById('submit_order').disabled = false;
-                  payFeedback.textContent = '';
-
-                  showStep('step_receipt');
-                })
-                .catch(function(){
-                  payFeedback.textContent = 'Erreur lors de l\'envoi. Réessayez.';
-                  payFeedback.className = 'order_feedback error';
-                  document.getElementById('submit_order').disabled = false;
-                });
-              };
-
-              /* ── Chargement dynamique du menu ── */
-              function buildDishCard(item){
-                var div = document.createElement('div');
-                div.className = 'dish';
-                var imgSrc = item.image || 'placeholder-plat.svg';
-                div.innerHTML =
-                  '<img src="' + imgSrc + '" alt="' + item.name + '">' +
-                  '<p>' + item.name + '</p>' +
-                  '<h2>' + item.price.toLocaleString('fr-FR') + ' ar</h2>' +
-                  '<button class="buy_btn">Ajouter au panier</button>';
-                div.querySelector('.buy_btn').onclick = function(){ addToCart(item.name, item.price); };
-                return div;
-              }
-
-              function renderMenu(menuItems){
-                var containers = {
-                  entrees: document.getElementById('dishes-entrees'),
-                  plats:   document.getElementById('dishes-plats'),
-                  desserts: document.getElementById('dishes-desserts'),
-                  alcoolisees: document.getElementById('dishes-alcoolisees'),
-                  softs:   document.getElementById('dishes-softs'),
-                  locales: document.getElementById('dishes-locales')
-                };
-                Object.values(containers).forEach(function(c){ if(c) c.innerHTML = ''; });
-                menuItems.forEach(function(item){
-                  var key = item.category === 'boissons' ? item.subcategory : item.category;
-                  var container = containers[key];
-                  if (container) container.appendChild(buildDishCard(item));
-                });
-              }
-
-              fetch('/api/menu')
-                .then(function(r){ return r.json(); })
-                .then(function(items){ renderMenu(items); })
-                .catch(function(){ console.error('Impossible de charger le menu.'); });
-
-              /* ── Formulaire de réservation ── */
-              document.getElementById('reservation_form').addEventListener('submit', function(e){
-                e.preventDefault();
-                var resFeedback = document.getElementById('res_feedback');
-                var submitBtn   = document.getElementById('res_submit');
-                var data = {
-                  name:  document.getElementById('res_name').value,
-                  email: document.getElementById('res_email').value,
-                  phone: document.getElementById('res_phone').value,
-                  date:  document.getElementById('res_date').value
-                };
-                submitBtn.disabled = true;
-                resFeedback.textContent = 'Envoi en cours...';
-                resFeedback.className = 'order_feedback';
-                fetch('/api/reservations', {
-                  method: 'POST',
-                  headers: { 'Content-Type': 'application/json' },
-                  body: JSON.stringify(data)
-                })
-                .then(function(r){ if(!r.ok) throw new Error(); return r.json(); })
-                .then(function(){
-                  resFeedback.textContent = 'Réservation envoyée ! Un email de confirmation vous a été envoyé.';
-                  resFeedback.className = 'order_feedback success';
-                  document.getElementById('reservation_form').reset();
-                  submitBtn.disabled = false;
-                })
-                .catch(function(){
-                  resFeedback.textContent = 'Erreur lors de l\'envoi. Réessayez.';
-                  resFeedback.className = 'order_feedback error';
-                  submitBtn.disabled = false;
-                });
-              });
-
-              renderCart();
-           </script>
-
+<script src="common.js"></script>
 </body>
-</html> 
+</html>

@@ -59,4 +59,3 @@ resto-bar-app/
     ├── admin.js
     └── uploads/           → photos des plats uploadées
 ```
-"# resto-bar-malagasy" 

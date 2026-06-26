@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menu — Resto Bar Malagasy</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body data-page="menu">
+<script src="components.js"></script>
+
+<section id="menu">
+    <h4 class="mini_title">Notre Menu</h4>
+    <h2 class="title">SAKAFO MATSIRO</h2>
+
+    <div class="menu_tabs">
+        <button class="tab_btn active" data-target="entrees">Entrées</button>
+        <button class="tab_btn" data-target="plats">Plats</button>
+        <button class="tab_btn" data-target="boissons">Boissons</button>
+        <button class="tab_btn" data-target="desserts">Desserts</button>
+    </div>
+
+    <div class="menu_category active" data-category="entrees">
+        <div class="dishes" id="dishes-entrees"><p class="menu_loading">Chargement...</p></div>
+    </div>
+    <div class="menu_category" data-category="plats">
+        <div class="dishes" id="dishes-plats"><p class="menu_loading">Chargement...</p></div>
+    </div>
+    <div class="menu_category" data-category="boissons">
+        <div class="drink_tabs">
+            <button class="drink_tab_btn active" data-sub="alcoolisees">Alcoolisées</button>
+            <button class="drink_tab_btn" data-sub="softs">Softs</button>
+            <button class="drink_tab_btn" data-sub="locales">Locales</button>
+        </div>
+        <div class="dishes drink_category active" id="dishes-alcoolisees" data-sub="alcoolisees"></div>
+        <div class="dishes drink_category" id="dishes-softs" data-sub="softs"></div>
+        <div class="dishes drink_category" id="dishes-locales" data-sub="locales"></div>
+    </div>
+    <div class="menu_category" data-category="desserts">
+        <div class="dishes" id="dishes-desserts"><p class="menu_loading">Chargement...</p></div>
+    </div>
+</section>
+
+<footer>
+  <div class="services_list">
+    <div class="service"><img src="img12.jpg" alt=""><h2>Ouverture</h2><p>07h30 à 22h45</p><p>Tous les jours</p></div>
+    <div class="service"><img src="img13.png" alt=""><h2>Adresse</h2><p>Antananarivo</p><p>Madagascar</p></div>
+    <div class="service"><img src="img14.jpg" alt=""><h2>Contact</h2><p>restobarmalagasy@gmail.com</p><p>034 XX XX XX</p></div>
+    <hr>
+  </div>
+  <p class="footer_text">Réalisé par <span>RAKOTONDRASOA Miariniaina Anthony Naivoson</span> | Tous les droits sont réservés.</p>
+</footer>
+
+<script src="common.js"></script>
+<script>
+  /* ── Onglets menu ── */
+  document.querySelectorAll('.tab_btn').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      document.querySelectorAll('.tab_btn').forEach(function(b){ b.classList.remove('active'); });
+      document.querySelectorAll('.menu_category').forEach(function(c){ c.classList.remove('active'); });
+      btn.classList.add('active');
+      document.querySelector('.menu_category[data-category="' + btn.dataset.target + '"]').classList.add('active');
+    });
+  });
+
+  document.querySelectorAll('.drink_tab_btn').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      document.querySelectorAll('.drink_tab_btn').forEach(function(b){ b.classList.remove('active'); });
+      document.querySelectorAll('.drink_category').forEach(function(c){ c.classList.remove('active'); });
+      btn.classList.add('active');
+      document.querySelector('.drink_category[data-sub="' + btn.dataset.sub + '"]').classList.add('active');
+    });
+  });
+
+  /* ── Chargement menu depuis API ── */
+  function buildDishCard(item){
+    var div = document.createElement('div');
+    div.className = 'dish';
+    var imgSrc = item.image || 'placeholder-plat.svg';
+    div.innerHTML =
+      '<img src="' + imgSrc + '" alt="' + item.name + '">' +
+      '<p>' + item.name + '</p>' +
+      '<h2>' + item.price.toLocaleString('fr-FR') + ' ar</h2>' +
+      '<button class="buy_btn">Ajouter au panier</button>';
+    div.querySelector('.buy_btn').onclick = function(){ addToCart(item.name, item.price); };
+    return div;
+  }
+
+  function renderMenu(menuItems){
+    var containers = {
+      entrees: document.getElementById('dishes-entrees'),
+      plats:   document.getElementById('dishes-plats'),
+      desserts: document.getElementById('dishes-desserts'),
+      alcoolisees: document.getElementById('dishes-alcoolisees'),
+      softs:   document.getElementById('dishes-softs'),
+      locales: document.getElementById('dishes-locales')
+    };
+    Object.values(containers).forEach(function(c){ if(c) c.innerHTML = ''; });
+    menuItems.forEach(function(item){
+      var key = item.category === 'boissons' ? item.subcategory : item.category;
+      var container = containers[key];
+      if (container) container.appendChild(buildDishCard(item));
+    });
+  }
+
+  fetch('/api/menu').then(function(r){ return r.json(); }).then(renderMenu);
+</script>
+</body>
+</html>

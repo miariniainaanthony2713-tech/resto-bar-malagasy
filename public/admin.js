@@ -1,6 +1,20 @@
 var socket = io();
 var connectionStatus = document.getElementById('connection_status');
 
+/* ── Token admin ── */
+var ADMIN_TOKEN = sessionStorage.getItem('admin_token');
+if (!ADMIN_TOKEN) { window.location.href = '/login.html'; }
+
+function authFetch(url, options) {
+  options = options || {};
+  options.headers = options.headers || {};
+  options.headers['x-admin-token'] = ADMIN_TOKEN;
+  return fetch(url, options).then(function(r){
+    if (r.status === 401) { window.location.href = '/login.html'; }
+    return r;
+  });
+}
+
 /* ══════════════════════════════════════════════
    NAVIGATION PAR ONGLETS
 ══════════════════════════════════════════════ */
@@ -61,7 +75,7 @@ function buildOrderCard(order){
     '<select class="order_status">' + options + '</select>';
 
   card.querySelector('.order_status').addEventListener('change', function(e){
-    fetch('/api/orders/' + order.id, {
+    authFetch('/api/orders/' + order.id, {
       method: 'PATCH',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ status: e.target.value })
@@ -80,7 +94,7 @@ function addOrUpdateOrder(order, prepend){
   else { ordersList.appendChild(card); }
 }
 
-fetch('/api/orders').then(function(r){ return r.json(); }).then(function(orders){
+authFetch('/api/orders').then(function(r){ return r.json(); }).then(function(orders){
   orders.forEach(function(o){ addOrUpdateOrder(o, false); });
 });
 
@@ -160,7 +174,7 @@ function buildMenuCard(item){
 
   card.querySelector('.btn_delete').addEventListener('click', function(){
     if (!confirm('Supprimer "' + item.name + '" ?')) return;
-    fetch('/api/menu/' + item.id, { method: 'DELETE' }).then(function(r){ if(!r.ok) throw new Error(); });
+    authFetch('/api/menu/' + item.id, { method: 'DELETE' }).then(function(r){ if(!r.ok) throw new Error(); });
   });
   return card;
 }
@@ -174,7 +188,7 @@ function renderMenuAdmin(items){
   items.forEach(function(item){ menuList.appendChild(buildMenuCard(item)); });
 }
 
-fetch('/api/menu').then(function(r){ return r.json(); }).then(renderMenuAdmin);
+authFetch('/api/menu').then(function(r){ return r.json(); }).then(renderMenuAdmin);
 
 function resetMenuForm(){
   editIdInput.value = '';
@@ -271,7 +285,7 @@ function buildResCard(r){
     '<select class="res_status_select">' + options + '</select>';
 
   card.querySelector('.res_status_select').addEventListener('change', function(e){
-    fetch('/api/reservations/' + r.id, {
+    authFetch('/api/reservations/' + r.id, {
       method: 'PATCH',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ status: e.target.value })
@@ -290,7 +304,7 @@ function addOrUpdateRes(r, prepend){
   else { resList.appendChild(card); }
 }
 
-fetch('/api/reservations').then(function(r){ return r.json(); }).then(function(list){
+authFetch('/api/reservations').then(function(r){ return r.json(); }).then(function(list){
   list.forEach(function(r){ addOrUpdateRes(r, false); });
 });
 

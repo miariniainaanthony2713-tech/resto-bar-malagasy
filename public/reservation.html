@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Réservation — Resto Bar Malagasy</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body data-page="reservation">
+<script src="components.js"></script>
+
+<section id="reservation" style="margin-top:80px;min-height:calc(100vh - 80px)">
+    <h4 class="mini_title">Réservation</h4>
+    <h2 class="title">Réservez votre table</h2>
+    <form id="reservation_form">
+        <label>Votre nom *</label>
+        <input type="text" id="res_name" placeholder="Votre nom complet" required>
+        <label>Votre email *</label>
+        <input type="email" id="res_email" placeholder="email@exemple.com" required>
+        <label>Votre numéro</label>
+        <input type="text" id="res_phone" placeholder="034 XX XX XX">
+        <label>Date de réservation *</label>
+        <input type="date" id="res_date" required>
+        <button type="submit" id="res_submit">Envoyer la réservation</button>
+        <p id="res_feedback" class="order_feedback"></p>
+    </form>
+</section>
+
+<footer>
+  <div class="services_list">
+    <div class="service"><img src="img12.jpg" alt=""><h2>Ouverture</h2><p>07h30 à 22h45</p><p>Tous les jours</p></div>
+    <div class="service"><img src="img13.png" alt=""><h2>Adresse</h2><p>Antananarivo</p><p>Madagascar</p></div>
+    <div class="service"><img src="img14.jpg" alt=""><h2>Contact</h2><p>restobarmalagasy@gmail.com</p><p>034 XX XX XX</p></div>
+    <hr>
+  </div>
+  <p class="footer_text">Réalisé par <span>RAKOTONDRASOA Miariniaina Anthony Naivoson</span> | Tous les droits sont réservés.</p>
+</footer>
+
+<script src="common.js"></script>
+<script>
+  document.getElementById('reservation_form').addEventListener('submit', function(e){
+    e.preventDefault();
+    var resFeedback = document.getElementById('res_feedback');
+    var submitBtn   = document.getElementById('res_submit');
+    var data = {
+      name:  document.getElementById('res_name').value,
+      email: document.getElementById('res_email').value,
+      phone: document.getElementById('res_phone').value,
+      date:  document.getElementById('res_date').value
+    };
+    submitBtn.disabled = true;
+    resFeedback.textContent = 'Envoi en cours...';
+    resFeedback.className = 'order_feedback';
+    fetch('/api/reservations', {
+      method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data)
+    })
+    .then(function(r){ if(!r.ok) throw new Error(); return r.json(); })
+    .then(function(){
+      resFeedback.textContent = 'Réservation envoyée ! Un email de confirmation vous a été envoyé.';
+      resFeedback.className = 'order_feedback success';
+      document.getElementById('reservation_form').reset();
+      submitBtn.disabled = false;
+    })
+    .catch(function(){
+      resFeedback.textContent = 'Erreur lors de l\'envoi. Réessayez.';
+      resFeedback.className = 'order_feedback error';
+      submitBtn.disabled = false;
+    });
+  });
+</script>
+</body>
+</html>

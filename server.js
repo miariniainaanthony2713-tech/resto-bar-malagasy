@@ -2,6 +2,7 @@ const express = require('express');
 const http = require('http');
 const path = require('path');
 const fs = require('fs');
+const crypto = require('crypto');
 const multer = require('multer');
 const nodemailer = require('nodemailer');
 const { Server } = require('socket.io');
@@ -9,6 +10,31 @@ const { Server } = require('socket.io');
 const app = express();
 const server = http.createServer(app);
 const io = new Server(server);
+
+// ─── Identifiants admin (à changer !) ───────────────────────────────────────
+const ADMIN_USERNAME = process.env.ADMIN_USERNAME || 'admin';
+const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || 'restobar2024';
+
+// Sessions actives (token → expiration)
+const sessions = new Map();
+
+function createSession() {
+  const token = crypto.randomBytes(32).toString('hex');
+  sessions.set(token, Date.now() + 8 * 60 * 60 * 1000); // 8h
+  return token;
+}
+
+function isValidSession(token) {
+  if (!token || !sessions.has(token)) return false;
+  if (sessions.get(token) < Date.now()) { sessions.delete(token); return false; }
+  return true;
+}
+
+function requireAuth(req, res, next) {
+  const token = req.headers['x-admin-token'] || req.query.token;
+  if (isValidSession(token)) return next();
+  res.status(401).json({ error: 'Non autorisé. Veuillez vous connecter.' });
+}
 
 // ─── Chemins des fichiers de données ────────────────────────────────────────
 const ORDERS_FILE       = path.join(__dirname, 'data', 'orders.json');
@@ -49,8 +75,8 @@ const upload = multer({
 const transporter = nodemailer.createTransport({
   service: 'gmail',
   auth: {
-    user: process.env.EMAIL_USER || 'miariniainaanthony2713@gmail.com',
-    pass: process.env.EMAIL_PASS || 'hncxvqddnfcgarze'
+    user: process.env.EMAIL_USER || 'ton.email@gmail.com',
+    pass: process.env.EMAIL_PASS || 'ton_mot_de_passe_app'
   }
 });
 
@@ -60,7 +86,7 @@ async function sendConfirmationEmail(reservation) {
   });
 
   await transporter.sendMail({
-    from: '"Resto Bar Malagasy" <miariniainaanthony2713@gmail.com>',
+    from: '"Resto Bar Malagasy" <ton.email@gmail.com>',
     to: reservation.email,
     subject: 'Confirmation de votre réservation — Resto Bar Malagasy',
     html: `
@@ -86,13 +112,37 @@ app.use(express.json());
 app.use(express.static(path.join(__dirname, 'public')));
 
 // ═══════════════════════════════════════════════════════════════════════════
-// ROUTES — COMMANDES
+// ROUTES — AUTHENTIFICATION ADMIN
 // ═══════════════════════════════════════════════════════════════════════════
 
-app.get('/api/orders', (req, res) => res.json(readJSON(ORDERS_FILE)));
+app.post('/api/admin/login', (req, res) => {
+  const { username, password } = req.body;
+  if (username === ADMIN_USERNAME && password === ADMIN_PASSWORD) {
+    const token = createSession();
+    res.json({ token });
+  } else {
+    res.status(401).json({ error: 'Identifiant ou mot de passe incorrect.' });
+  }
+});
+
+app.post('/api/admin/logout', (req, res) => {
+  const token = req.headers['x-admin-token'];
+  if (token) sessions.delete(token);
+  res.json({ ok: true });
+});
+
+app.get('/api/admin/check', (req, res) => {
+  const token = req.headers['x-admin-token'];
+  res.json({ valid: isValidSession(token) });
+});
+
+
+// ═══════════════════════════════════════════════════════════════════════════
+
+app.get('/api/orders', requireAuth, (req, res) => res.json(readJSON(ORDERS_FILE)));
 
 app.post('/api/orders', (req, res) => {
-  const { customerName, tableNumber, items } = req.body;
+  const { customerName, tableNumber, items, customerEmail } = req.body;
   if (!Array.isArray(items) || items.length === 0)
     return res.status(400).json({ error: 'Panier vide.' });
 
@@ -100,6 +150,7 @@ app.post('/api/orders', (req, res) => {
   const order = {
     id: Date.now().toString(),
     customerName: customerName?.trim() || 'Client',
+    customerEmail: customerEmail?.trim() || '',
     tableNumber: tableNumber?.trim() || '-',
     items, total,
     payment: req.body.payment || null,
@@ -114,7 +165,7 @@ app.post('/api/orders', (req, res) => {
   res.status(201).json(order);
 });
 
-app.patch('/api/orders/:id', (req, res) => {
+app.patch('/api/orders/:id', requireAuth, (req, res) => {
   const orders = readJSON(ORDERS_FILE);
   const order = orders.find(o => o.id === req.params.id);
   if (!order) return res.status(404).json({ error: 'Introuvable.' });
@@ -131,7 +182,7 @@ app.patch('/api/orders/:id', (req, res) => {
 app.get('/api/menu', (req, res) => res.json(readJSON(MENU_FILE)));
 
 // Ajouter un plat (avec photo)
-app.post('/api/menu', upload.single('image'), (req, res) => {
+app.post('/api/menu', requireAuth, upload.single('image'), (req, res) => {
   const { name, price, category, subcategory } = req.body;
   if (!name || !price || !category)
     return res.status(400).json({ error: 'Champs manquants.' });
@@ -153,7 +204,7 @@ app.post('/api/menu', upload.single('image'), (req, res) => {
 });
 
 // Modifier un plat (avec ou sans nouvelle photo)
-app.patch('/api/menu/:id', upload.single('image'), (req, res) => {
+app.patch('/api/menu/:id', requireAuth, upload.single('image'), (req, res) => {
   const menu = readJSON(MENU_FILE);
   const item = menu.find(m => m.id === req.params.id);
   if (!item) return res.status(404).json({ error: 'Introuvable.' });
@@ -177,7 +228,7 @@ app.patch('/api/menu/:id', upload.single('image'), (req, res) => {
 });
 
 // Supprimer un plat
-app.delete('/api/menu/:id', (req, res) => {
+app.delete('/api/menu/:id', requireAuth, (req, res) => {
   let menu = readJSON(MENU_FILE);
   const item = menu.find(m => m.id === req.params.id);
   if (!item) return res.status(404).json({ error: 'Introuvable.' });
@@ -197,7 +248,7 @@ app.delete('/api/menu/:id', (req, res) => {
 // ROUTES — RÉSERVATIONS
 // ═══════════════════════════════════════════════════════════════════════════
 
-app.get('/api/reservations', (req, res) => res.json(readJSON(RESERVATIONS_FILE)));
+app.get('/api/reservations', requireAuth, (req, res) => res.json(readJSON(RESERVATIONS_FILE)));
 
 app.post('/api/reservations', async (req, res) => {
   const { name, email, phone, date } = req.body;
@@ -229,7 +280,7 @@ app.post('/api/reservations', async (req, res) => {
   res.status(201).json(reservation);
 });
 
-app.patch('/api/reservations/:id', (req, res) => {
+app.patch('/api/reservations/:id', requireAuth, (req, res) => {
   const reservations = readJSON(RESERVATIONS_FILE);
   const r = reservations.find(r => r.id === req.params.id);
   if (!r) return res.status(404).json({ error: 'Introuvable.' });
@@ -239,7 +290,88 @@ app.patch('/api/reservations/:id', (req, res) => {
   res.json(r);
 });
 
-// ─── Socket.io ───────────────────────────────────────────────────────────────
+// Envoyer le ticket de commande par email
+app.post('/api/send-ticket', async (req, res) => {
+  const { email, order, total } = req.body;
+  if (!email || !order) return res.status(400).json({ error: 'Données manquantes.' });
+
+  const date = new Date().toLocaleDateString('fr-FR', {
+    weekday: 'long', year: 'numeric', month: 'long', day: 'numeric',
+    hour: '2-digit', minute: '2-digit'
+  });
+
+  const itemsRows = order.items.map(i =>
+    `<tr>
+      <td style="padding:8px 0;border-bottom:1px dashed #eee;font-size:13px">${i.quantity} × ${i.name}</td>
+      <td style="text-align:right;padding:8px 0;border-bottom:1px dashed #eee;font-size:13px">${(i.price*i.quantity).toLocaleString('fr-FR')} Ar</td>
+    </tr>`
+  ).join('');
+
+  try {
+    await transporter.sendMail({
+      from: '"Resto Bar Malagasy" <ton.email@gmail.com>',
+      to: email,
+      subject: '🧾 Votre ticket — Resto Bar Malagasy',
+      html: `
+        <div style="font-family:sans-serif;max-width:480px;margin:auto;color:#1A1A1A">
+          <div style="background:#1A1A1A;padding:20px;text-align:center;border-radius:8px 8px 0 0">
+            <h2 style="color:#FF6B00;margin:0">RESTO BAR</h2>
+            <h3 style="color:#fff;margin:4px 0;font-weight:400">MALAGASY</h3>
+            <p style="color:#aaa;font-size:12px;margin:4px 0">Antananarivo, Madagascar</p>
+            <p style="color:#aaa;font-size:12px;margin:4px 0">${date}</p>
+          </div>
+          <div style="border:1px solid #eee;border-top:none;padding:20px;border-radius:0 0 8px 8px">
+            <p>Bonjour <strong>${order.customerName || 'Client'}</strong>,</p>
+            <p>Merci pour votre commande ! Voici votre ticket :</p>
+            <table style="width:100%;border-collapse:collapse;margin:16px 0">
+              <tbody>${itemsRows}</tbody>
+            </table>
+            <div style="display:flex;justify-content:space-between;font-weight:bold;font-size:16px;padding:10px 0;border-top:2px solid #1A1A1A">
+              <span>TOTAL</span>
+              <span style="color:#FF6B00">${Number(total).toLocaleString('fr-FR')} Ar</span>
+            </div>
+            <hr style="border:none;border-top:1px dashed #eee;margin:16px 0">
+            <table style="font-size:13px;color:#555;width:100%">
+              <tr><td><strong>Table</strong></td><td>${order.tableNumber || '—'}</td></tr>
+              <tr><td><strong>Paiement</strong></td><td>${order.payment?.operator || '—'}</td></tr>
+              ${order.payment?.transactionId && order.payment.transactionId !== 'Espèces'
+                ? `<tr><td><strong>Transaction</strong></td><td>${order.payment.transactionId}</td></tr>`
+                : '<tr><td><strong>Paiement</strong></td><td>À la caisse</td></tr>'}
+            </table>
+            <p style="text-align:center;font-size:12px;color:#999;margin-top:20px">
+              Merci de votre visite ! 🍽️<br>
+              <strong style="color:#FF6B00">Resto Bar Malagasy</strong>
+            </p>
+          </div>
+        </div>
+      `
+    });
+    res.json({ sent: true });
+  } catch (err) {
+    console.error('Ticket email non envoyé :', err.message);
+    res.status(500).json({ error: 'Erreur envoi email.' });
+  }
+});
+
+// Route ticket automatique après commande
+app.post('/api/orders/:id/ticket', async (req, res) => {
+  const orders = readJSON(ORDERS_FILE);
+  const order = orders.find(o => o.id === req.params.id);
+  if (!order || !order.customerEmail) return res.status(400).json({ error: 'Pas d\'email.' });
+
+  try {
+    await transporter.sendMail({
+      from: '"Resto Bar Malagasy" <ton.email@gmail.com>',
+      to: order.customerEmail,
+      subject: '🧾 Votre ticket — Resto Bar Malagasy',
+      html: `<p>Bonjour ${order.customerName}, votre commande de ${order.total.toLocaleString('fr-FR')} Ar a été confirmée. Merci !</p>`
+    });
+    res.json({ sent: true });
+  } catch(err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
 io.on('connection', socket => {
   console.log('Client connecté :', socket.id);
 });

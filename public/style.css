@@ -40,17 +40,17 @@ header {
  .logo span {
     color: #1A1A1A;
  }
- .menu li {
+ .nav_menu li {
    margin: 0 15px;  
    list-style: none;
  }
- .menu li a {
+ .nav_menu li a {
     font-size: 14px;
     text-decoration: 0;
     color: #999;
     position: relative;
  }
- .menu li a::before {  
+ .nav_menu li a::before {  
     position: absolute;
     top: -5px;
     left: 0;
@@ -61,10 +61,10 @@ header {
     background-color:#FF6B00 ;
     transition: 0,5s;
  }
- .menu li a:hover:before{
+ .nav_menu li a:hover:before{
     width: 100%;
   }
-  .menu li a:hover::after {
+  .nav_menu li a:hover::after {
     position: absolute;
     bottom: -5px;
     right: 0;
@@ -75,10 +75,10 @@ header {
     background-color: #FF6B00;
     transition: 0.5s;
   }
-  .menu li a:hover::after {
+  .nav_menu li a:hover::after {
     width: 100%;
   }
-  .menu li a:hover {
+  .nav_menu li a:hover {
     color: #000;
   }
 
@@ -647,7 +647,7 @@ hr {
 }
 /* Responsive */
 @media (max-width:964px) {
-    header .menu {
+    header .nav_menu {
         display: none;
     }
     header {
@@ -752,7 +752,7 @@ hr {
     .toggle_menu.active::after {
         transform: translateY(0) rotate(-135deg);
     } 
-    header .menu.responsive {
+    header .nav_menu.responsive {
         display: flex;
         position: relative;
         top: 50px;
@@ -765,7 +765,7 @@ hr {
         box-shadow: 0 0 10px rgba(0,0,0,0.1);
         flex-direction: column;
     }
-    header .menu.responsive li {
+    header .nav_menu.responsive li {
         margin: 15px 0;
     }
 }
@@ -933,4 +933,46 @@ hr {
     cursor: pointer;
     width: 100%;
     font-family: inherit;
+}
+
+/* ── Lien actif dans la navigation ── */
+.nav_menu li a.active {
+    color: #FF6B00;
+}
+.nav_menu li a.active::before,
+.nav_menu li a.active::after {
+    width: 100%;
+}
+
+/* ── Logo cliquable ── */
+.logo a {
+    text-decoration: none;
+    color: inherit;
+}
+
+/* ── Boutons du reçu ── */
+.receipt_actions {
+    display: flex;
+    gap: 8px;
+    margin-top: 14px;
+    margin-bottom: 6px;
+}
+.receipt_btn_pdf,
+.receipt_btn_email {
+    flex: 1;
+    padding: 9px 6px;
+    border: none;
+    border-radius: 6px;
+    font-size: 11px;
+    font-weight: 700;
+    cursor: pointer;
+    font-family: inherit;
+}
+.receipt_btn_pdf {
+    background-color: #1A1A1A;
+    color: #fff;
+}
+.receipt_btn_email {
+    background-color: #FF6B00;
+    color: #fff;
 }

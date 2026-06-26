@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Connexion Admin — Resto Bar Malagasy</title>
+    <link rel="stylesheet" href="login.css">
+</head>
+<body>
+    <div class="login_container">
+        <div class="login_card">
+            <div class="login_logo">
+                <h1><span>RESTO BAR</span> MALAGASY</h1>
+                <p>Espace administrateur</p>
+            </div>
+            <div id="login_error" class="login_error"></div>
+            <div class="login_form">
+                <div class="form_group">
+                    <label>Identifiant</label>
+                    <input type="text" id="username" placeholder="admin" autocomplete="username">
+                </div>
+                <div class="form_group">
+                    <label>Mot de passe</label>
+                    <input type="password" id="password" placeholder="••••••••" autocomplete="current-password">
+                </div>
+                <button id="login_btn">Se connecter</button>
+            </div>
+        </div>
+    </div>
+    <script>
+      document.getElementById('login_btn').onclick = function(){
+        var username = document.getElementById('username').value.trim();
+        var password = document.getElementById('password').value;
+        var errorEl  = document.getElementById('login_error');
+
+        if (!username || !password){
+          errorEl.textContent = 'Veuillez remplir tous les champs.';
+          return;
+        }
+
+        document.getElementById('login_btn').disabled = true;
+        errorEl.textContent = '';
+
+        fetch('/api/admin/login', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ username: username, password: password })
+        })
+        .then(function(r){ return r.json(); })
+        .then(function(data){
+          if (data.success){
+            sessionStorage.setItem('admin_token', data.token);
+            window.location.href = '/admin.html';
+          } else {
+            errorEl.textContent = 'Identifiant ou mot de passe incorrect.';
+            document.getElementById('login_btn').disabled = false;
+          }
+        })
+        .catch(function(){
+          errorEl.textContent = 'Erreur de connexion. Réessayez.';
+          document.getElementById('login_btn').disabled = false;
+        });
+      };
+
+      // Permettre de valider avec Entrée
+      document.getElementById('password').addEventListener('keydown', function(e){
+        if (e.key === 'Enter') document.getElementById('login_btn').click();
+      });
+    </script>
+</body>
+</html>
