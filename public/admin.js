@@ -234,7 +234,7 @@ saveBtn.addEventListener('click', function(){
   menuFeedback.className = 'form_feedback';
   saveBtn.disabled = true;
 
-  fetch(url, { method: method, body: formData })
+  authFetch(url, { method: method, body: formData })
     .then(function(r){ if(!r.ok) throw new Error(); return r.json(); })
     .then(function(){
       menuFeedback.textContent = id ? 'Plat modifié !' : 'Plat ajouté !';
