@@ -1,21 +1,90 @@
 [
-  { "id": "1", "category": "entrees", "subcategory": "", "name": "SALADE DE POMME DE TERRE MALGACHE", "price": 12000, "image": "" },
-  { "id": "2", "category": "entrees", "subcategory": "", "name": "LEGUMES SAUTES SPECIAL", "price": 10000, "image": "" },
-  { "id": "3", "category": "entrees", "subcategory": "", "name": "ACCRAS DE MORUE", "price": 8000, "image": "" },
-  { "id": "4", "category": "plats", "subcategory": "", "name": "PIZZA QUATRE FROMAGES MADA", "price": 10000, "image": "" },
-  { "id": "5", "category": "plats", "subcategory": "", "name": "SPAGHETTI POULET PANE", "price": 13000, "image": "" },
-  { "id": "6", "category": "plats", "subcategory": "", "name": "HAMBURGER VIANDE MALGACHE", "price": 12000, "image": "" },
-  { "id": "7", "category": "plats", "subcategory": "", "name": "AFRICAN CHICKEN MALGACHE", "price": 15000, "image": "" },
-  { "id": "8", "category": "boissons", "subcategory": "alcoolisees", "name": "THB - BIERE MALGACHE", "price": 6000, "image": "" },
-  { "id": "9", "category": "boissons", "subcategory": "alcoolisees", "name": "RHUM ARRANGE MAISON", "price": 8000, "image": "" },
-  { "id": "10", "category": "boissons", "subcategory": "alcoolisees", "name": "MOJITO MALAGASY", "price": 12000, "image": "" },
-  { "id": "11", "category": "boissons", "subcategory": "softs", "name": "SODA (COCA, FANTA, SPRITE)", "price": 3000, "image": "" },
-  { "id": "12", "category": "boissons", "subcategory": "softs", "name": "JUS DE FRUITS FRAIS", "price": 5000, "image": "" },
-  { "id": "13", "category": "boissons", "subcategory": "softs", "name": "EAU MINERALE", "price": 2000, "image": "" },
-  { "id": "14", "category": "boissons", "subcategory": "locales", "name": "RANONAPANGO", "price": 2000, "image": "" },
-  { "id": "15", "category": "boissons", "subcategory": "locales", "name": "JUS DE BAOBAB", "price": 4000, "image": "" },
-  { "id": "16", "category": "boissons", "subcategory": "locales", "name": "JUS DE LITCHI", "price": 4500, "image": "" },
-  { "id": "17", "category": "desserts", "subcategory": "", "name": "PANCAKES MAKI", "price": 14000, "image": "" },
-  { "id": "18", "category": "desserts", "subcategory": "", "name": "MOFO GASY", "price": 5000, "image": "" },
-  { "id": "19", "category": "desserts", "subcategory": "", "name": "FRUITS DE SAISON", "price": 6000, "image": "" }
+  {
+    "id": "1",
+    "category": "entrees",
+    "subcategory": "",
+    "name": "SALADE DE POMME DE TERRE MALGACHE",
+    "price": 12000,
+    "image": ""
+  },
+  {
+    "id": "2",
+    "category": "entrees",
+    "subcategory": "",
+    "name": "LEGUMES SAUTES SPECIAL",
+    "price": 10000,
+    "image": ""
+  },
+  {
+    "id": "3",
+    "category": "entrees",
+    "subcategory": "",
+    "name": "ACCRAS DE MORUE",
+    "price": 8000,
+    "image": ""
+  },
+  {
+    "id": "4",
+    "category": "plats",
+    "subcategory": "",
+    "name": "PIZZA QUATRE FROMAGES MADA",
+    "price": 10000,
+    "image": ""
+  },
+  {
+    "id": "5",
+    "category": "plats",
+    "subcategory": "",
+    "name": "SPAGHETTI POULET PANE",
+    "price": 13000,
+    "image": ""
+  },
+  {
+    "id": "6",
+    "category": "plats",
+    "subcategory": "",
+    "name": "HAMBURGER VIANDE MALGACHE",
+    "price": 12000,
+    "image": ""
+  },
+  {
+    "id": "7",
+    "category": "plats",
+    "subcategory": "",
+    "name": "AFRICAN CHICKEN MALGACHE",
+    "price": 15000,
+    "image": ""
+  },
+  {
+    "id": "8",
+    "category": "boissons",
+    "subcategory": "alcoolisees",
+    "name": "THB - BIERE MALGACHE",
+    "price": 6000,
+    "image": ""
+  },
+  {
+    "id": "9",
+    "category": "boissons",
+    "subcategory": "alcoolisees",
+    "name": "RHUM ARRANGE MAISON",
+    "price": 8000,
+    "image": ""
+  },
+  {
+    "id": "10",
+    "category": "boissons",
+    "subcategory": "alcoolisees",
+    "name": "MOJITO MALAGASY",
+    "price": 12000,
+    "image": ""
+  },
+  {
+    "id": "11",
+    "category": "boissons",
+    "subcategory": "softs",
+    "name": "SODA (COCA, FANTA, SPRITE)",
+    "price": 3000,
+    "image": ""
+  }
 ]
