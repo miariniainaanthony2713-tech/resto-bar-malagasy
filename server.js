@@ -156,6 +156,7 @@ app.patch('/api/orders/:id', requireAuth, async (req, res) => {
 function dbToOrder(row) {
   return {
     id: row.id,
+    orderNumber: String(row.order_number || 0).padStart(4, '0'),
     customerName: row.customer_name,
     customerEmail: row.customer_email,
     tableNumber: row.table_number,
@@ -166,6 +167,27 @@ function dbToOrder(row) {
     createdAt: row.created_at
   };
 }
+
+// Route publique — suivi de commande par numéro
+app.get('/api/track/:orderNumber', async (req, res) => {
+  const num = req.params.orderNumber.replace(/^#/, '').replace(/^0+/, '') || '0';
+  const { rows } = await pool.query(
+    'SELECT * FROM orders WHERE order_number=$1',
+    [parseInt(num, 10)]
+  );
+  if (!rows.length) return res.status(404).json({ error: 'Commande introuvable.' });
+  const o = dbToOrder(rows[0]);
+  // On renvoie uniquement les infos nécessaires (pas l'email)
+  res.json({
+    orderNumber: o.orderNumber,
+    customerName: o.customerName,
+    tableNumber: o.tableNumber,
+    items: o.items,
+    total: o.total,
+    status: o.status,
+    createdAt: o.createdAt
+  });
+});
 
 // ════════════════════════════════════════════════════════════════
 // MENU

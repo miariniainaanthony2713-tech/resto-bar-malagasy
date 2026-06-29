@@ -11,6 +11,7 @@ var headerHTML = `
     <li><a href="/menu.html" class="${CURRENT_PAGE==='menu'?'active':''}">Menu</a></li>
     <li><a href="/apropos.html" class="${CURRENT_PAGE==='apropos'?'active':''}">À Propos</a></li>
     <li><a href="/reservation.html" class="${CURRENT_PAGE==='reservation'?'active':''}">Réservation</a></li>
+    <li><a href="/suivi.html" class="${CURRENT_PAGE==='suivi'?'active':''}">Suivi</a></li>
   </ul>
   <div class="cart_icon" id="cart_icon">🛒 <span id="cart_count">0</span></div>
   <div class="toggle_menu"></div>
@@ -74,6 +75,7 @@ var headerHTML = `
       <p>Merci, votre commande est en cours de préparation.</p>
     </div>
     <div class="receipt_body" id="receipt_body">
+      <div class="receipt_order_num">Commande <span id="rcpt_order_num">#0000</span></div>
       <div class="receipt_row"><span>Nom</span><span id="rcpt_name">—</span></div>
       <div class="receipt_row"><span>Table</span><span id="rcpt_table">—</span></div>
       <div class="receipt_row"><span>Paiement</span><span id="rcpt_operator">—</span></div>
@@ -82,6 +84,7 @@ var headerHTML = `
       <div id="rcpt_items" class="rcpt_items"></div>
       <hr class="receipt_hr">
       <div class="receipt_row receipt_total_row"><span>TOTAL</span><span id="rcpt_total">0 Ar</span></div>
+      <p class="receipt_track_hint">Suivez votre commande sur <a href="/suivi.html" target="_blank" style="color:#FF6B00;font-weight:700">/suivi.html</a></p>
       <p class="receipt_note">Le paiement sera vérifié par notre équipe. En cas de problème, contactez-nous au <strong>034 XX XX XX</strong>.</p>
     </div>
     <div class="receipt_actions">

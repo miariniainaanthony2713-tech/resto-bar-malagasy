@@ -5,7 +5,6 @@ const pool = new Pool({
   ssl: process.env.DATABASE_URL ? { rejectUnauthorized: false } : false
 });
 
-// Initialiser les tables si elles n'existent pas
 async function initDB() {
   const client = await pool.connect();
   try {
@@ -22,6 +21,7 @@ async function initDB() {
 
       CREATE TABLE IF NOT EXISTS orders (
         id TEXT PRIMARY KEY,
+        order_number SERIAL,
         customer_name TEXT DEFAULT 'Client',
         customer_email TEXT DEFAULT '',
         table_number TEXT DEFAULT '-',

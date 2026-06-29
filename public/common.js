@@ -180,6 +180,7 @@ if (submitOrder) submitOrder.onclick = function(){
   .then(function(res){ if(!res.ok) throw new Error(); return res.json(); })
   .then(function(savedOrder){
     /* Remplir le reçu */
+    document.getElementById('rcpt_order_num').textContent = '#' + (savedOrder.orderNumber || '0000');
     document.getElementById('rcpt_name').textContent     = customerName || '—';
     document.getElementById('rcpt_table').textContent    = tableNumber  || '—';
     document.getElementById('rcpt_operator').textContent = op.name;

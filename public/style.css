@@ -975,3 +975,30 @@ hr {
     background-color: #FF6B00;
     color: #fff;
 }
+
+/* ── Numéro de commande dans le reçu ── */
+.receipt_order_num {
+    font-size: 20px;
+    font-weight: 700;
+    color: #FF6B00;
+    text-align: center;
+    margin: 8px 0 4px;
+}
+.receipt_track_hint {
+    font-size: 11px;
+    color: #999;
+    text-align: center;
+    margin-top: 10px;
+}
+.suivi_link_btn {
+    display: block;
+    text-align: center;
+    background: rgba(255,107,0,0.1);
+    color: #FF6B00;
+    font-size: 12px;
+    font-weight: 700;
+    padding: 8px;
+    border-radius: 6px;
+    text-decoration: none;
+    margin-top: 10px;
+}
